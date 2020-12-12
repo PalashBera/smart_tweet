@@ -17,3 +17,13 @@
 body {
   font-family: 'Poppins', sans-serif;
 }
+
+a {
+  color: #00BCD4;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: #008495;
+  }
+}
