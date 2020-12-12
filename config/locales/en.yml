@@ -1,2 +1,8 @@
 en:
   page_title: "Smart Tweet"
+
+  alert_prefix:
+    success: "Well done!"
+    info: "Heads up!"
+    warning: "Warning!"
+    danger: "Oh snap!"
