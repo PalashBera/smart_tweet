@@ -39,3 +39,13 @@ PreCommit:
 PreRebase:
   MergedCommits:
     enabled: true
+
+PrePush:
+  ALL:
+    requires_files: false
+    required: false
+    quiet: false
+
+  RSpec:
+    enabled: true
+    required_executable: 'rspec'
