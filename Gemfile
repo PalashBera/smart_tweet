@@ -10,6 +10,7 @@ gem "mysql2", "~> 0.5.3"
 gem "puma", "~> 5.1", ">= 5.1.1"
 gem "rails", "~> 6.1.0"
 gem "sass-rails", "~> 6.0"
+gem "strip_attributes", "~> 1.11"
 gem "turbolinks", "~> 5.2", ">= 5.2.1"
 gem "webpacker", "~> 5.2", ">= 5.2.1"
 

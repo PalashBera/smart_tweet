@@ -34,6 +34,12 @@ RSpec.describe User, type: :model do
     it { should have_db_index(:unlock_token) }
   end
 
+  describe "attribute strip" do
+    it { is_expected.to strip_attribute(:first_name).collapse_spaces }
+    it { is_expected.to strip_attribute(:last_name).collapse_spaces }
+    it { is_expected.to strip_attribute(:email).collapse_spaces }
+  end
+
   describe "validations" do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
