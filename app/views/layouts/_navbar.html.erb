@@ -10,6 +10,10 @@
       <ul class="navbar-nav ml-auto">
         <% if current_user %>
           <li class="nav-item">
+            <span class="nav-link">Hi, <%= current_user.full_name %></span>
+          </li>
+
+          <li class="nav-item">
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
           </li>
         <% else %>
