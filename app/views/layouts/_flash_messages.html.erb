@@ -3,9 +3,7 @@
     <div class="col-sm-12 col-md-8">
       <div class="alert alert-<%= message_type(type) %> alert-dismissible fade show mb-4 flash-alert" role="alert">
         <strong><%= flash_message_prefix(message_type(type)) %></strong> <%= message %>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <%= image_tag "cancel.svg", class: "close", "data-dismiss": "alert" %>
       </div>
     </div>
   </div>
