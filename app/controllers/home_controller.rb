@@ -1,3 +1,5 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    @tweets = Tweet.all.includes(:user).decending
+  end
 end

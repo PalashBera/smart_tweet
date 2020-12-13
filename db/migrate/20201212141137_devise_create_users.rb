@@ -4,8 +4,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
   def change
     create_table :users do |t|
       ## Database authenticatable
-      t.string  :first_name,        null: false, default: "", limit: 100
-      t.string  :last_name,         null: false, default: "", limit: 100
+      t.string :first_name,         null: false, default: "", limit: 100
+      t.string :last_name,          null: false, default: "", limit: 100
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
@@ -33,7 +33,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.integer  :failed_attempts, default: 0, null: false
       t.string   :unlock_token
       t.datetime :locked_at
-
 
       t.timestamps null: false
     end

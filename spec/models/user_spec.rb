@@ -40,6 +40,10 @@ RSpec.describe User, type: :model do
     it { is_expected.to strip_attribute(:email).collapse_spaces }
   end
 
+  describe "associations" do
+    it { should have_many(:tweets).dependent(:destroy) }
+  end
+
   describe "validations" do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
@@ -54,6 +58,14 @@ RSpec.describe User, type: :model do
 
     it "should return the full name of the user" do
       expect(user.full_name).to eq("Palash Bera")
+    end
+  end
+
+  describe "#initial" do
+    let(:user) { create(:user, first_name: "Palash", last_name: "Bera") }
+
+    it "should return initial of the user" do
+      expect(user.initial).to eq("PB")
     end
   end
 end
