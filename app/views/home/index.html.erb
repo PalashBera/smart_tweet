@@ -6,7 +6,7 @@
     </div>
 
     <% @tweets.each do |tweet| %>
-      <%= render "tweets/tweet", tweet: tweet %>
+      <%= render "tweets/tweet", tweet: tweet, comments_count: tweet.comments.length %>
     <% end %>
   </div>
 </div>

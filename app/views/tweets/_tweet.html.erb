@@ -19,5 +19,15 @@
     </div>
 
     <p class="mb-0"><%= tweet.message %></p>
+
+    <div class="d-flex align-items-center justify-content-between mt-3">
+      <%= link_to "#", class: "tweet-link d-flex align-items-center justify-content-center", title: "Retweet" do %>
+         <%= image_tag("repeat.svg") %>
+      <% end %>
+
+      <%= link_to tweet_path(tweet), class: "tweet-link d-flex align-items-center justify-content-center", title: "Show comments" do %>
+         <span><%= comments_count %></span> <%= image_tag("message-square.svg") %>
+      <% end %>
+    </div>
   </div>
 </div>
