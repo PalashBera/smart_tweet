@@ -1,6 +1,16 @@
 class TweetsController < ApplicationController
   before_action :authenticate_user!, except: :show
 
+  def index
+    if params[:query].present?
+      tweets = current_user.tweets.search(params[:query])
+    else
+      tweets = current_user.tweets
+    end
+
+    @pagy, @tweets = pagy_countless(tweets.includes(included_resources).decending, link_extra: 'data-remote="true"')
+  end
+
   def show
     @tweet = Tweet.find(params[:id])
     @comments = @tweet.comments.includes(:user).decending
@@ -48,5 +58,9 @@ class TweetsController < ApplicationController
 
   def tweet_params
     params.require(:tweet).permit(:message)
+  end
+
+  def included_resources
+    %i[user comments retweet retweets]
   end
 end

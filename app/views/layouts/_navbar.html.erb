@@ -10,7 +10,7 @@
       <ul class="navbar-nav ml-auto">
         <% if current_user %>
           <li class="nav-item">
-            <span class="nav-link">Hi, <%= current_user.full_name %></span>
+            <%= link_to "Timeline", tweets_path, class: "nav-link" %>
           </li>
 
           <li class="nav-item">

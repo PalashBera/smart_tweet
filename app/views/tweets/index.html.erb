@@ -1,0 +1,21 @@
+<div class="row justify-content-center">
+  <div class="col-md-12 col-lg-10 col-xl-8">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <h3>Timeline</h3>
+      <%= link_to "New tweet", new_tweet_path, class: "btn custom-primary-btn", title: "New tweet" %>
+    </div>
+
+    <%= form_tag tweets_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query, params[:query], class: "form-control mr-2", required: true, autocomplete: :off, placeholder: "Search here...", maxlength: 250 %>
+      <%= submit_tag "Search", class: "btn custom-primary-btn", data: { disable_with: "Searching..." } %>
+    <% end %>
+
+    <div id="tweets">
+      <%= render "tweets/tweet_list" %>
+    </div>
+
+    <div id="auto_next_link">
+      <%= render "shared/auto_incremental_pagy" %>
+    </div>
+  </div>
+</div>

@@ -1,24 +1,54 @@
 require "rails_helper"
 
 RSpec.describe TweetsController, type: :controller do
-  let(:user)  { create(:user) }
-  let(:tweet) { create(:tweet, user: user) }
+  let!(:user)  { create(:user) }
+  let!(:tweet) { create(:tweet, user: user, message: "hello") }
+
+  describe "GET index" do
+    it "requires login" do
+      sign_out user
+      get :new
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it "returns http status 200" do
+      sign_in user
+      get :index
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "populates instance variable with an array of tweets" do
+      sign_in user
+      get :index
+      expect(assigns(:tweets)).to eq([tweet])
+      expect(assigns(:tweets).size).to eq(1)
+    end
+
+    it "should search tweet" do
+      sign_in user
+      get :index, params: { query: "hello" }
+      expect(assigns(:tweets)).to eq([tweet])
+    end
+
+    it "render index template" do
+      sign_in user
+      get :index
+      expect(response).to render_template(:index)
+    end
+  end
 
   describe "GET #show" do
     it "returns http status 200" do
-      sign_in user
       get :show, params: { id: tweet.id }
       expect(response).to have_http_status(:ok)
     end
 
     it "assigns the requested tweet to an instance variable" do
-      sign_in user
       get :show, params: { id: tweet.id }
       expect(assigns(:tweet)).to eq(tweet)
     end
 
     it "render show template" do
-      sign_in user
       get :show, params: { id: tweet.id }
       expect(response).to render_template(:show)
     end
