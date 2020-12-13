@@ -1,17 +1,19 @@
 require "rails_helper"
 
-RSpec.describe Tweet, type: :model do
-  let(:user) { create(:user) }
+RSpec.describe Comment, type: :model do
+  let(:comment) { create(:comment) }
 
   describe "active record columns" do
     it { should have_db_column(:message) }
     it { should have_db_column(:user_id) }
+    it { should have_db_column(:tweet_id) }
     it { should have_db_column(:created_at) }
     it { should have_db_column(:updated_at) }
   end
 
   describe "active record index" do
     it { should have_db_index(:user_id) }
+    it { should have_db_index(:tweet_id) }
   end
 
   describe "attribute strip" do
@@ -20,8 +22,7 @@ RSpec.describe Tweet, type: :model do
 
   describe "associations" do
     it { should belong_to(:user) }
-
-    it { should have_many(:comments).dependent(:destroy) }
+    it { should belong_to(:tweet) }
   end
 
   describe "validations" do
@@ -31,31 +32,31 @@ RSpec.describe Tweet, type: :model do
 
   describe "#scopes" do
     context "decending" do
-      let!(:tweet1) { create(:tweet) }
-      let!(:tweet2) { create(:tweet) }
+      let!(:comment1) { create(:comment) }
+      let!(:comment2) { create(:comment) }
 
-      it "should return tweets newly created first" do
-        expect(Tweet.decending).to eq([tweet2, tweet1])
+      it "should return comments newly created first" do
+        expect(Comment.decending).to eq([comment2, comment1])
       end
     end
   end
 
-  describe "#own_tweet?" do
-    context "when tweet is created by current_user" do
+  describe "#own_comment?" do
+    context "when comment is created by current_user" do
       let(:current_user)  { create(:user) }
-      let(:tweet)         { create(:tweet, user: current_user) }
+      let(:comment)         { create(:comment, user: current_user) }
 
       it "should return true" do
-        expect(tweet.own_tweet?(current_user)).to eq(true)
+        expect(comment.own_comment?(current_user)).to eq(true)
       end
     end
 
-    context "when tweet is not created by current_user" do
+    context "when comment is not created by current_user" do
       let(:current_user)  { create(:user) }
-      let(:tweet)         { create(:tweet) }
+      let(:comment)         { create(:comment) }
 
       it "should return false" do
-        expect(tweet.own_tweet?(current_user)).to eq(false)
+        expect(comment.own_comment?(current_user)).to eq(false)
       end
     end
   end

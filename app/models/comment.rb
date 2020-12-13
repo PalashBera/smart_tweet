@@ -1,9 +1,8 @@
-class Tweet < ApplicationRecord
+class Comment < ApplicationRecord
   strip_attributes only: :message, collapse_spaces: true, replace_newlines: true
 
   belongs_to :user
-
-  has_many :comments, dependent: :destroy
+  belongs_to :tweet
 
   delegate :initial,   to: :user, prefix: true
   delegate :full_name, to: :user, prefix: true
@@ -12,7 +11,7 @@ class Tweet < ApplicationRecord
 
   scope :decending, -> { order(created_at: :desc) }
 
-  def own_tweet?(current_user = nil)
+  def own_comment?(current_user = nil)
     user == current_user
   end
 end

@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   strip_attributes only: %i[first_name last_name email], collapse_spaces: true, replace_newlines: true
 
-  has_many :tweets, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :tweets,   dependent: :destroy
 
   validates :first_name, :last_name, :email, presence: true, length: { maximum: 100 }
 

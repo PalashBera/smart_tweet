@@ -1,5 +1,11 @@
 class TweetsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
+
+  def show
+    @tweet = Tweet.find(params[:id])
+    @comments = @tweet.comments.includes(:user).decending
+    @new_comment = @tweet.comments.new
+  end
 
   def new
     @tweet = Tweet.new
@@ -33,7 +39,6 @@ class TweetsController < ApplicationController
 
   def destroy
     @tweet = current_user.tweets.find(params[:id])
-
     @tweet.destroy
     flash[:danger] = t("flash_messages.deleted", name: "Tweet")
     redirect_to root_path

@@ -9,9 +9,9 @@ user = User.create!(
 )
 
 50.times do
-  Tweet.create(user: user, message: Faker::Quote.famous_last_words)
-end
+  tweet = Tweet.create(user: user, message: SecureRandom.hex(100))
 
-50.times do
-  Tweet.create(user: user, message: Faker::Quote.matz)
+  5.times do
+    tweet.comments.create(user: user, message: SecureRandom.hex(100))
+  end
 end

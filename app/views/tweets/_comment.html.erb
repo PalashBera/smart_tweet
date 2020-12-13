@@ -1,0 +1,22 @@
+<div class="card tweet-card">
+  <div class="card-body">
+    <div class="tweet-header d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <span class="user-initial d-flex align-items-center justify-content-center mr-3"><%= comment.user_initial %></span>
+
+        <div class="d-flex flex-column">
+          <span class="user-full-name"><%= comment.user_full_name %></span>
+          <small class="text-muted"><%= creation_timestamp(comment) %></small>
+        </div>
+      </div>
+
+      <% if comment.own_comment?(current_user) %>
+        <div class="d-flex comment-action-buttons">
+          <%= link_to "Delete", tweet_comment_path(tweet, comment), method: :delete, class: "btn delete-btn", title: "Delete comment", data: { confirm: "Are you sure you want to delete this comment?" } %>
+        </div>
+      <% end %>
+    </div>
+
+    <p class="mb-0"><%= comment.message %></p>
+  </div>
+</div>

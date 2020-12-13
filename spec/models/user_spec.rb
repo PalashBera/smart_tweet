@@ -41,6 +41,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "associations" do
+    it { should have_many(:comments).dependent(:destroy) }
     it { should have_many(:tweets).dependent(:destroy) }
   end
 

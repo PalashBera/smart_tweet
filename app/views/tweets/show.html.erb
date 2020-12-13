@@ -1,0 +1,31 @@
+<% provide(:title, "#{@tweet.user_full_name}'s Tweet") %>
+<% provide(:button_text, "Comment") %>
+
+<div class="row justify-content-center">
+  <div class="col-sm-12 col-md-8">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <h3><%= @tweet.user_full_name %>'s Tweet</h3>
+    </div>
+
+    <%= render "tweets/tweet", tweet: @tweet %>
+
+    <h4>Comments (<%= @comments.length %>)</h4>
+
+    <% if current_user %>
+      <%= form_for [@tweet, @new_comment] do |f| %>
+        <div class="form-group">
+          <%= f.label :message, "Your comment" %>
+          <%= f.text_area :message, class: "form-control", autofocus: true, required: true, autocomplete: :off, placeholder: "Write your comment here...", maxlength: 250, rows: 4 %>
+        </div>
+
+        <div class="submit-button">
+          <%= f.submit yield(:button_text), class: "btn custom-primary-btn btn-xs-block", data: { disable_with: "Saving..." } %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% @comments.each do |comment| %>
+      <%= render "tweets/comment", tweet: @tweet, comment: comment %>
+    <% end %>
+  </div>
+</div>

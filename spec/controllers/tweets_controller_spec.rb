@@ -4,14 +4,34 @@ RSpec.describe TweetsController, type: :controller do
   let(:user)  { create(:user) }
   let(:tweet) { create(:tweet, user: user) }
 
+  describe "GET #show" do
+    it "returns http status 200" do
+      sign_in user
+      get :show, params: { id: tweet.id }
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "assigns the requested tweet to an instance variable" do
+      sign_in user
+      get :show, params: { id: tweet.id }
+      expect(assigns(:tweet)).to eq(tweet)
+    end
+
+    it "render show template" do
+      sign_in user
+      get :show, params: { id: tweet.id }
+      expect(response).to render_template(:show)
+    end
+  end
+
   describe "GET #new" do
     it "requires login" do
       sign_out user
       get :new
-      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(new_user_session_path)
     end
 
-    it "returns http status 302" do
+    it "returns http status 200" do
       sign_in user
       get :new
       expect(response).to have_http_status(:ok)
@@ -34,10 +54,10 @@ RSpec.describe TweetsController, type: :controller do
     it "requires login" do
       sign_out user
       get :edit, params: { id: tweet.id }
-      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(new_user_session_path)
     end
 
-    it "returns http status 302" do
+    it "returns http status 200" do
       sign_in user
       get :edit, params: { id: tweet.id }
       expect(response).to have_http_status(:ok)
@@ -60,7 +80,7 @@ RSpec.describe TweetsController, type: :controller do
     it "requires login" do
       sign_out user
       post :create, params: { tweet: { message: "Demo Text" }}
-      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     context "with valid attributes" do
@@ -111,7 +131,7 @@ RSpec.describe TweetsController, type: :controller do
         expect(assigns(:tweet)).to be_a_new(Tweet)
       end
 
-      it "returns http status 302" do
+      it "returns http status 200" do
         sign_in user
         post :create, params: { tweet: { message: "" }}
         expect(response).to have_http_status(:ok)
@@ -129,7 +149,7 @@ RSpec.describe TweetsController, type: :controller do
     it "requires login" do
       sign_out user
       patch :update, params: { id: tweet.id, tweet: { message: "Demo Text" }}
-      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     context "with valid attributes" do
@@ -179,7 +199,7 @@ RSpec.describe TweetsController, type: :controller do
         expect(assigns(:tweet)).to eq(tweet)
       end
 
-      it "returns http status 302" do
+      it "returns http status 200" do
         sign_in user
         patch :update, params: { id: tweet.id, tweet: { message: "" }}
         expect(response).to have_http_status(:ok)
@@ -193,12 +213,11 @@ RSpec.describe TweetsController, type: :controller do
     end
   end
 
-
   describe "DELETE #destroy" do
     it "requires login" do
       sign_out user
       delete :destroy, params: { id: tweet.id }
-      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(new_user_session_path)
     end
 
     it "delete the requested tweet" do
