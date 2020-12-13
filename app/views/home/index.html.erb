@@ -10,8 +10,12 @@
       <%= submit_tag "Search", class: "btn custom-primary-btn", data: { disable_with: "Searching..." } %>
     <% end %>
 
-    <% @tweets.each do |tweet| %>
-      <%= render "tweets/tweet", tweet: tweet, comments_count: tweet.comments.size, retweet: tweet.retweet %>
-    <% end %>
+    <div id="tweets">
+      <%= render "tweets/tweet_list" %>
+    </div>
+
+    <div id="auto_next_link">
+      <%= render "shared/auto_incremental_pagy" %>
+    </div>
   </div>
 </div>

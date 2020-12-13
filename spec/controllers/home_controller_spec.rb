@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe HomeController, type: :controller do
-  let(:user)  { create(:user) }
-  let(:tweet) { create(:tweet, message: "hello") }
+  let(:user)   { create(:user) }
+  let!(:tweet) { create(:tweet, message: "hello") }
 
   describe "GET index" do
     it "returns http status 200" do

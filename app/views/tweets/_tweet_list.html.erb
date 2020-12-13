@@ -1,0 +1,3 @@
+<% @tweets.each do |tweet| %>
+  <%= render "tweets/tweet", tweet: tweet, comments_count: tweet.comments.size, retweet: tweet.retweet %>
+<% end %>
