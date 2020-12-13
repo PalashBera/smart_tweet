@@ -13,6 +13,7 @@ class Tweet < ApplicationRecord
   validates :message, presence: true, length: { maximum: 250 }
 
   scope :decending, -> { order(created_at: :desc) }
+  scope :search,    ->(query) { where("message LIKE ?", "%#{query}%") }
 
   def own_tweet?(current_user = nil)
     user == current_user

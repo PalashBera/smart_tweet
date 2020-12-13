@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe HomeController, type: :controller do
   let(:user)  { create(:user) }
-  let(:tweet) { create(:tweet) }
+  let(:tweet) { create(:tweet, message: "hello") }
 
   describe "GET index" do
     it "returns http status 200" do
@@ -14,6 +14,11 @@ describe HomeController, type: :controller do
       get :index
       expect(assigns(:tweets)).to eq([tweet])
       expect(assigns(:tweets).size).to eq(1)
+    end
+
+    it "should search tweet" do
+      get :index, params: { query: "hello" }
+      expect(assigns(:tweets)).to eq([tweet])
     end
 
     it "render index template" do

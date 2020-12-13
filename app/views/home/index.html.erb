@@ -5,6 +5,11 @@
       <%= link_to "New tweet", new_tweet_path, class: "btn custom-primary-btn", title: "New tweet" %>
     </div>
 
+    <%= form_tag root_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query, params[:query], class: "form-control mr-2", required: true, autocomplete: :off, placeholder: "Search here...", maxlength: 250 %>
+      <%= submit_tag "Search", class: "btn custom-primary-btn", data: { disable_with: "Searching..." } %>
+    <% end %>
+
     <% @tweets.each do |tweet| %>
       <%= render "tweets/tweet", tweet: tweet, comments_count: tweet.comments.size, retweet: tweet.retweet %>
     <% end %>

@@ -40,6 +40,16 @@ RSpec.describe Tweet, type: :model do
         expect(Tweet.decending).to eq([tweet2, tweet1])
       end
     end
+
+    context "search" do
+      let!(:tweet1) { create(:tweet, message: "demo") }
+      let!(:tweet2) { create(:tweet, message: "hello") }
+
+      it "should return tweets when it match the search query" do
+        expect(Tweet.search("demo").include?(tweet1)).to eq(true)
+        expect(Tweet.search("demo").include?(tweet2)).to eq(false)
+      end
+    end
   end
 
   describe "#own_tweet?" do
