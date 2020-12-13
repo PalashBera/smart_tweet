@@ -28,7 +28,7 @@
 
           <div class="form-group">
             <%= f.label :password %>
-            <%= f.password_field :password, class: "form-control", required: true, placeholder: "Password", minlength: 6, maxlength: 128, autocomplete: "new-password" %>
+            <%= f.password_field :password, class: "form-control", required: true, placeholder: "Password", minlength: 6, maxlength: 128, autocomplete: "current-password" %>
             <% if @minimum_password_length %>
               <small id="passwordHelp" class="form-text text-muted">Password length should be minimum <%= @minimum_password_length %> characters.</small>
             <% end %>
@@ -36,7 +36,7 @@
 
           <div class="form-group">
             <%= f.label :password_confirmation, "Password Confirmation" %>
-            <%= f.password_field :password_confirmation, class: "form-control", required: true, placeholder: "Password Confirmation", minlength: 6, maxlength: 128, autocomplete: "current-password" %>
+            <%= f.password_field :password_confirmation, class: "form-control", required: true, placeholder: "Password Confirmation", minlength: 6, maxlength: 128, autocomplete: "new-password" %>
           </div>
 
           <br />
