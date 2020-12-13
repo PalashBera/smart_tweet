@@ -20,8 +20,10 @@ RSpec.describe Tweet, type: :model do
 
   describe "associations" do
     it { should belong_to(:user) }
+    it { should belong_to(:retweet).class_name("Tweet").optional }
 
     it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:retweets).class_name("Tweet").with_foreign_key("retweet_id") }
   end
 
   describe "validations" do

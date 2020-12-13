@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :tweets do
     resources :comments, only: %i[create destroy]
+    resources :retweets, only: %i[new create]
   end
 
   root "home#index"

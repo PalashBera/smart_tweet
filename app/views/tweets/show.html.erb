@@ -7,7 +7,7 @@
       <h3><%= @tweet.user_full_name %>'s Tweet</h3>
     </div>
 
-    <%= render "tweets/tweet", tweet: @tweet, comments_count: @comments.length %>
+    <%= render "tweets/tweet", tweet: @tweet, comments_count: @comments.length, retweet: @tweet.retweet %>
 
     <h4>Comments (<%= @comments.length %>)</h4>
 

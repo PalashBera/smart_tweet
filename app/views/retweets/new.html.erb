@@ -1,0 +1,48 @@
+<% provide(:title, "New Retweet") %>
+<% provide(:button_text, "Create") %>
+
+<div class="row justify-content-center">
+  <div class="col-sm-12 col-md-8">
+    <div class="card tweet-card form-tweet-card">
+      <div class="card-body">
+        <h3 class="mb-4">New Retweet</h3>
+
+        <%= form_for [@tweet, @retweet], url: tweet_retweets_path do |f| %>
+          <%= render "shared/error_messages", resource: @retweet %>
+
+          <div class="card tweet-card">
+            <div class="card-body">
+              <div class="tweet-header d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <span class="user-initial d-flex align-items-center justify-content-center mr-3"><%= @tweet.user_initial %></span>
+
+                  <div class="d-flex flex-column">
+                    <span class="user-full-name"><%= @tweet.user_full_name %></span>
+                    <small class="text-muted"><%= creation_timestamp(@tweet) %></small>
+                  </div>
+                </div>
+              </div>
+
+              <p class="mb-0"><%= @tweet.message %></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :message %>
+            <%= f.text_area :message, class: "form-control", autofocus: true, required: true, autocomplete: :off, placeholder: "Write your message here...", maxlength: 250, rows: 4 %>
+          </div>
+
+          <div class="form-row">
+            <div class="col-xs-12 order-2 order-sm-1 col-sm-3">
+              <%= link_to "Cancel", root_path, class: "btn custom-secondary-btn btn-xs-block" %>
+            </div>
+
+            <div class="col-xs-12 text-right order-1 order-sm-2 col-sm-9 submit-button">
+              <%= f.submit yield(:button_text), class: "btn custom-primary-btn btn-xs-block", data: { disable_with: "Saving..." } %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

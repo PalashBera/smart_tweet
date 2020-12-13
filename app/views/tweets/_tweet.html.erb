@@ -4,7 +4,7 @@
       <div class="d-flex align-items-center">
         <span class="user-initial d-flex align-items-center justify-content-center mr-3"><%= tweet.user_initial %></span>
 
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column mr-2">
           <span class="user-full-name"><%= tweet.user_full_name %></span>
           <small class="text-muted"><%= creation_timestamp(tweet) %></small>
         </div>
@@ -20,13 +20,36 @@
 
     <p class="mb-0"><%= tweet.message %></p>
 
+    <% if retweet %>
+      <%= link_to tweet_path(retweet), class: "retweet-container" do %>
+        <div class="card tweet-card">
+          <div class="card-body">
+            <div class="tweet-header d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <span class="user-initial d-flex align-items-center justify-content-center mr-3"><%= retweet.user_initial %></span>
+
+                <div class="d-flex flex-column">
+                  <span class="user-full-name"><%= retweet.user_full_name %></span>
+                  <small class="text-muted"><%= creation_timestamp(retweet) %></small>
+                </div>
+              </div>
+            </div>
+
+            <p class="mb-0"><%= retweet.message %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
     <div class="d-flex align-items-center justify-content-between mt-3">
-      <%= link_to "#", class: "tweet-link d-flex align-items-center justify-content-center", title: "Retweet" do %>
+      <%= link_to new_tweet_retweet_path(tweet), class: "tweet-link d-flex align-items-center justify-content-center", title: "Retweet" do %>
+        <span><%= tweet.retweets.length %></span>
          <%= image_tag("repeat.svg") %>
       <% end %>
 
       <%= link_to tweet_path(tweet), class: "tweet-link d-flex align-items-center justify-content-center", title: "Show comments" do %>
-         <span><%= comments_count %></span> <%= image_tag("message-square.svg") %>
+         <span><%= comments_count %></span>
+         <%= image_tag("message-square.svg") %>
       <% end %>
     </div>
   </div>

@@ -2,8 +2,10 @@ class Tweet < ApplicationRecord
   strip_attributes only: :message, collapse_spaces: true, replace_newlines: true
 
   belongs_to :user
+  belongs_to :retweet, class_name: "Tweet", optional: true
 
   has_many :comments, dependent: :destroy
+  has_many :retweets, class_name: "Tweet", foreign_key: :retweet_id
 
   delegate :initial,   to: :user, prefix: true
   delegate :full_name, to: :user, prefix: true

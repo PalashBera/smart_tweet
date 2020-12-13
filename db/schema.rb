@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_13_075042) do
+ActiveRecord::Schema.define(version: 2020_12_13_104438) do
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "message", limit: 250, null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_12_13_075042) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "retweet_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 

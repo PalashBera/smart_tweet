@@ -57,4 +57,27 @@
       color: #000000;
     }
   }
+
+  .retweet-container {
+    color: #000000;
+    display: flex;
+    transition: all 0.3s ease;
+    margin-top: 35px;
+    border-radius: 15px;
+
+    .tweet-card {
+      box-shadow: none;
+      border: 1px solid #D8D8D8;
+      margin: 0;
+      background-color: transparent;
+    }
+
+    &:hover {
+      background-color: #EBEBEB;
+    }
+  }
+}
+
+.form-tweet-card .card-body {
+  padding: 2rem;
 }
