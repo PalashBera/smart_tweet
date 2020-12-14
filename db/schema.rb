@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2020_12_13_104438) do
 
-  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
     t.string "message", limit: 250, null: false
     t.bigint "user_id", null: false
     t.bigint "tweet_id", null: false
@@ -22,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_12_13_104438) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "tweets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tweets", force: :cascade do |t|
     t.string "message", limit: 250, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_12_13_104438) do
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "first_name", limit: 100, default: "", null: false
     t.string "last_name", limit: 100, default: "", null: false
     t.string "email", default: "", null: false
@@ -42,8 +45,8 @@ ActiveRecord::Schema.define(version: 2020_12_13_104438) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"

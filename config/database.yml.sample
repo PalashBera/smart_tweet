@@ -1,10 +1,9 @@
 default: &default
-  adapter: mysql2
-  encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
+  adapter: postgresql
+  encoding: unicode
+  username:
   password:
-  socket: /var/run/mysqld/mysqld.sock
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
@@ -17,5 +16,5 @@ test:
 production:
   <<: *default
   database: smart_tweet_production
-  username: smart_tweet
-  password: <%= ENV['SMART_TWEET_DATABASE_PASSWORD'] %>
+  username: trashy
+  password: <%= ENV['TRASHY_DATABASE_PASSWORD'] %>
