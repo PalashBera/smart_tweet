@@ -1,11 +1,6 @@
 class HomeController < ApplicationController
   def index
-    if params[:query].present?
-      tweets = Tweet.search(params[:query])
-    else
-      tweets = Tweet.all
-    end
-
+    tweets = params[:query].present? ? Tweet.search(params[:query]) : Tweet.all
     @pagy, @tweets = pagy_countless(tweets.includes(included_resources).decending, link_extra: 'data-remote="true"')
   end
 

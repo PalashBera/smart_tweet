@@ -1758,7 +1758,7 @@ Style/ConditionalAssignment:
                  assignment to a variable and variable comparison instead
                  of assigning that variable inside of each branch.
   Enabled: true
-  EnforcedStyle: assign_inside_condition
+  EnforcedStyle: assign_to_condition
   SupportedStyles:
     - assign_to_condition
     - assign_inside_condition

@@ -2,12 +2,7 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!, except: :show
 
   def index
-    if params[:query].present?
-      tweets = current_user.tweets.search(params[:query])
-    else
-      tweets = current_user.tweets
-    end
-
+    tweets = params[:query].present? ? current_user.tweets.search(params[:query]) : current_user.tweets
     @pagy, @tweets = pagy_countless(tweets.includes(included_resources).decending, link_extra: 'data-remote="true"')
   end
 
